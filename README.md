@@ -1,20 +1,13 @@
 # BTK Akademi React Kursu
 
-Visual Studio Code Ayarları
-
-settings.json
+React Kütüphaneleri
 
 ```
-{
-    "workbench.colorTheme": "Visual Studio Dark",
-    "editor.fontSize": 16,
-    "window.zoomLevel": 0.6,
-    "terminal.integrated.fontSize": 16,
-    "emmet.includeLanguages": {
-        "javascript": "javascriptreact"
-    },
-    "editor.unicodeHighlight.ambiguousCharacters": false,
-    "editor.wordWrap": "on",
-    "workbench.iconTheme": "material-icon-theme"
-}
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 ```
