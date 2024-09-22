@@ -1,5 +1,20 @@
 # BTK Akademi React Kursu
 
-First React App Projesi
+Visual Studio Code Ayarları
 
-[https://codesandbox.io/p/sandbox/first-react-app-3kpkcp](https://)
+settings.json
+
+```
+{
+    "workbench.colorTheme": "Visual Studio Dark",
+    "editor.fontSize": 16,
+    "window.zoomLevel": 0.6,
+    "terminal.integrated.fontSize": 16,
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact"
+    },
+    "editor.unicodeHighlight.ambiguousCharacters": false,
+    "editor.wordWrap": "on",
+    "workbench.iconTheme": "material-icon-theme"
+}
+```
