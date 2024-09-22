@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="root"></div>
+
+    <script>
+        // const mesaj = "Merhaba";
+        // const template = `<h1>${mesaj} BTK Akademi</h1>`;
+        // document.getElementById("root").innerHTML = template;
+
+        // Performans => React
+        const template = React.createElement("h1", null, "Merhaba BTK Akademi");
+        const root = ReactDOM.createRoot(document.getElementById("root"));
+        root.render(template);
+
+        // Kolay kullanım => JSX => Babel
+        // const template = <h1>Merhaba BTK Akademi</h1>  // JSX
+
+    </script>
+
+</body>
+</html>
