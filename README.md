@@ -1,13 +1,8 @@
 # BTK Akademi React Kursu
 
-React Kütüphaneleri
+React ile Proje Oluşturma
 
 ```
-<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-
-<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+npm create vite@latest --proje-ismi
+npm create vite@5 --proje-ismi
 ```
