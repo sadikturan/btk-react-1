@@ -34,41 +34,34 @@ function ProducList() {
       "description" : "Lorem ipsum dolor sit amet.",
       "price": 100000
     }
+    ,
+    {
+      "image" :  "4.jpg",
+      "title" : "IPhone 19",
+      "description" : "Lorem ipsum dolor sit amet.",
+      "price": 110000
+    }
   ];
 
   return (
     <>
       <h2>Product List</h2>
-      <Product 
-          image={ items[0].image } 
-          title={items[0].title} 
-          description={items[0].description} 
-          price={items[0].price}/>
-
-      <Product 
-          image={ items[1].image } 
-          title={items[1].title} 
-          description={items[1].description} 
-          price={items[1].price}/>
-
-      <Product 
-          image={ items[2].image } 
-          title={items[2].title} 
-          description={items[2].description} 
-          price={items[2].price}/>
-            
+      {
+        items.map((item, index) => (
+          <Product key={ index } productObj = { item } />
+        ))
+      }  
     </>
   );  
 }
 
-function Product(props) {
-  console.log(props);
+function Product({ productObj }) {
   return (
     <div>
-      <img src={ "/img/" + props.image } alt="" />
-      <h2>{ props.title }</h2>
-      <p>{ props.description }</p>
-      <span>{ props.price } TL</span>
+      <img src={ "/img/" + productObj.image } alt="" />
+      <h2>{ productObj.title }</h2>
+      <p>{ productObj.description }</p>
+      <span>{ productObj.price } TL</span>
     </div>
   );
 }
