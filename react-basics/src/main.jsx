@@ -1,26 +1,29 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-
+// import 'bootstrap/dist/css/bootstrap.min.css'; 
 import './index.css';
 
 function App() {
   return (
     <>
       <Header />
-      <ProducList />
-      <Footer />
+      <div className='container mt-3'>
+        <ProducList />
+      </div>
     </>
   );
 }
 
 function Header() {
-  const style = {
-    color: "red",
-    fontSize: "30px",
-    textTransform: "uppercase"
-  };
-
-  return <h1 style={style}>Header</h1>;
+  return (
+    <header>
+      <nav className='navbar navbar-expand bg-dark border-bottom border-body' data-bs-theme="dark">
+        <div className='container'>
+          <a href="#" className='navbar-brand'>Store App</a>
+        </div>
+      </nav>
+    </header>
+  );
 }
 
 function ProducList() {
@@ -53,20 +56,54 @@ function ProducList() {
       "description" : "Lorem ipsum dolor sit amet.",
       "price": 110000,
       "is_active": true
+    },
+    {
+      "image" :  "4.jpg",
+      "title" : "IPhone 19",
+      "description" : "Lorem ipsum dolor sit amet.",
+      "price": 110000,
+      "is_active": true
+    },
+    {
+      "image" :  "4.jpg",
+      "title" : "IPhone 19",
+      "description" : "Lorem ipsum dolor sit amet.",
+      "price": 110000,
+      "is_active": true
+    },
+    {
+      "image" :  "4.jpg",
+      "title" : "IPhone 19",
+      "description" : "Lorem ipsum dolor sit amet.",
+      "price": 110000,
+      "is_active": true
+    },
+    {
+      "image" :  "4.jpg",
+      "title" : "IPhone 19",
+      "description" : "Lorem ipsum dolor sit amet.",
+      "price": 110000,
+      "is_active": true
+    },
+    {
+      "image" :  "4.jpg",
+      "title" : "IPhone 19",
+      "description" : "Lorem ipsum dolor sit amet.",
+      "price": 110000,
+      "is_active": true
     }
   ];
 
-  // const items = [];
-
   return (
     <>
-      <h2 className='title'>Product List</h2>
       {
         items.length > 0 ? (
-          <div id='product-list'>
+          <div className='row row-cols-2 row-cols-md-3 row-cols-xl-4 g-4' id='product-list'>
           {
             items.map((item, index) => (
-              <Product key={ index } productObj = { item } />
+              <div className='col'>
+                <Product key={ index } productObj = { item } />
+              </div>
             ))
           }  
         </div>
@@ -83,11 +120,14 @@ function Product({ productObj }) {
   if(!productObj.is_active) return null;
 
   return (
-    <div>
-      <img src={ "/img/" + productObj.image } alt="" />
-      <h2>{ productObj.title }</h2>
-      <p>{ productObj.description }</p>
-      <span className= {`f20 ${productObj.price < 100000 ? "discount" : "price"}`}>{ productObj.price } TL</span>
+    <div className='card shadow-sm'>
+      <img className='card-img-top p-2 p-md-3 border-bottom' src={ "/img/" + productObj.image } alt="" />
+      <div className='card-body'>
+        <h2 className='card-title'>{ productObj.title }</h2>
+        <p className='card-text'>{ productObj.description }</p>
+        <span className='badge text-bg-success' >{ productObj.price } TL</span>
+      </div>
+
     </div>
   );
 }
