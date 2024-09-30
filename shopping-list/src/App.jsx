@@ -1,19 +1,25 @@
 import { useState } from "react";
 
-const items = [
-  { id:1, title: "Yumurta", quantity: 10, completed: true },
-  { id:1, title: "Ekmek", quantity: 2, completed: true },
-  { id:1, title: "Süt", quantity: 1, completed: false },
-  { id:1, title: "Et", quantity: 1, completed: true },
-  { id:1, title: "Zeytin", quantity: 1, completed: false }
-];
+// const items = [
+//   { id:1, title: "Yumurta", quantity: 10, completed: true },
+//   { id:1, title: "Ekmek", quantity: 2, completed: true },
+//   { id:1, title: "Süt", quantity: 1, completed: false },
+//   { id:1, title: "Et", quantity: 1, completed: true },
+//   { id:1, title: "Zeytin", quantity: 1, completed: false }
+// ];
 
 function App() {
+  const [items, setItems] = useState([]);
+
+  function handleAddItem(item) {
+    setItems((items) => [...items, item]);  
+  }
+
   return (
     <div className="app">
       <Header />
-      <Form />
-      <List />
+      <Form onAddItem={handleAddItem} />
+      <List items={items} />
       <Summary />
     </div>
   );
@@ -25,14 +31,17 @@ function Header() {
   );
 }
 
-function Form() {
+function Form({onAddItem}) {
   const [title, setTitle] = useState("");
-  const [quantity, setQuantity] = useState(1)
+  const [quantity, setQuantity] = useState(1);
+  
 
   function handleFormSubmit(e) {
     e.preventDefault();
     const item = {id: Date.now(), title, quantity, completed: false};
     console.log(item);
+
+    onAddItem(item);
 
     setTitle('');
     setQuantity(1);
@@ -49,7 +58,7 @@ function Form() {
   );
 }
 
-function List() {
+function List({items}) {
   return (
     <div className="list">
       <ul>
