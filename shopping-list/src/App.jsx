@@ -19,11 +19,15 @@ function App() {
     setItems(items => items.filter(item => item.id !== id));
   }
 
+  function handleUpdateItem(id) {
+    setItems(items => items.map(item => item.id == id ? {...item, completed: !item.completed}: item));
+  }
+
   return (
     <div className="app">
       <Header />
       <Form onAddItem={handleAddItem} />
-      <List items={items} onDeleteItem={handleDeleteItem}/>
+      <List items={items} onDeleteItem={handleDeleteItem} onUpdateItem={handleUpdateItem}/>
       <Summary />
     </div>
   );
@@ -62,13 +66,14 @@ function Form({onAddItem}) {
   );
 }
 
-function List({items, onDeleteItem}) {
+function List({items, onDeleteItem, onUpdateItem}) {
   return <>
     {
       items.length > 0 ? (
         <div className="list">
           <ul>
-            { items.map((i, index) => (<Item item={i} key={index} onDeleteItem={onDeleteItem} />)) }
+            { items.map((i, index) => (<Item item={i} key={index} onDeleteItem={onDeleteItem} 
+              onUpdateItem={onUpdateItem} />)) }
           </ul>
         </div>
       ): 
@@ -77,9 +82,10 @@ function List({items, onDeleteItem}) {
   </>;
 }
 
-function Item({ item, onDeleteItem }) {
+function Item({ item, onDeleteItem, onUpdateItem }) {
   return (
     <li>
+      <input type="checkbox" checked={item.completed} onChange={() => onUpdateItem(item.id)} />
       <span style={item.completed ? {textDecoration:"line-through"}: {}}>{item.quantity} { item.title }</span>
       <button onClick={() => onDeleteItem(item.id)}>X</button>
     </li>
