@@ -1,25 +1,29 @@
 import { useState } from "react";
 
-// const items = [
-//   { id:1, title: "Yumurta", quantity: 10, completed: true },
-//   { id:1, title: "Ekmek", quantity: 2, completed: true },
-//   { id:1, title: "Süt", quantity: 1, completed: false },
-//   { id:1, title: "Et", quantity: 1, completed: true },
-//   { id:1, title: "Zeytin", quantity: 1, completed: false }
-// ];
+const data = [
+  { id:1, title: "Yumurta", quantity: 10, completed: true },
+  { id:2, title: "Ekmek", quantity: 2, completed: true },
+  { id:3, title: "Süt", quantity: 1, completed: false },
+  { id:4, title: "Et", quantity: 1, completed: true },
+  { id:5, title: "Zeytin", quantity: 1, completed: false }
+];
 
 function App() {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(data);
 
   function handleAddItem(item) {
     setItems((items) => [...items, item]);  
+  }
+
+  function handleDeleteItem(id) {
+    setItems(items => items.filter(item => item.id !== id));
   }
 
   return (
     <div className="app">
       <Header />
       <Form onAddItem={handleAddItem} />
-      <List items={items} />
+      <List items={items} onDeleteItem={handleDeleteItem}/>
       <Summary />
     </div>
   );
@@ -58,21 +62,26 @@ function Form({onAddItem}) {
   );
 }
 
-function List({items}) {
-  return (
-    <div className="list">
-      <ul>
-        { items.map((i, index) => (<Item item={i} key={index} />)) }
-      </ul>
-    </div>
-  );
+function List({items, onDeleteItem}) {
+  return <>
+    {
+      items.length > 0 ? (
+        <div className="list">
+          <ul>
+            { items.map((i, index) => (<Item item={i} key={index} onDeleteItem={onDeleteItem} />)) }
+          </ul>
+        </div>
+      ): 
+      <p>no items</p>
+  }
+  </>;
 }
 
-function Item({ item }) {
+function Item({ item, onDeleteItem }) {
   return (
     <li>
       <span style={item.completed ? {textDecoration:"line-through"}: {}}>{item.quantity} { item.title }</span>
-      <button>X</button>
+      <button onClick={() => onDeleteItem(item.id)}>X</button>
     </li>
   );
 }
