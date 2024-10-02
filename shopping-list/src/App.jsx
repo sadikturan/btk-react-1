@@ -28,7 +28,7 @@ function App() {
       <Header />
       <Form onAddItem={handleAddItem} />
       <List items={items} onDeleteItem={handleDeleteItem} onUpdateItem={handleUpdateItem}/>
-      <Summary />
+      <Summary items={items}/>
     </div>
   );
 }
@@ -77,7 +77,7 @@ function List({items, onDeleteItem, onUpdateItem}) {
           </ul>
         </div>
       ): 
-      <p>no items</p>
+      <div className="list">Sepette ürün yok.</div>
   }
   </>;
 }
@@ -92,9 +92,21 @@ function Item({ item, onDeleteItem, onUpdateItem }) {
   );
 }
 
-function Summary() {
+function Summary({items}) {
+  if(items.length === 0) {
+    return (
+      <footer className="summary">Alışveriş listenizi hazırlamaya başlayabilirsiniz.</footer>
+    );
+  }
+  const itemsCount = items.length;
+  const completedItemsCount = items.filter(item => item.completed).length;
+
   return (
-    <footer className="summary">Alışveriş sepetinizde 10 ürün bulunmaktadır.</footer>
+    <footer className="summary">
+      {itemsCount === completedItemsCount ? 
+      <p>Alışverişi tamamladınız. 😍</p> : 
+      <p>Alışveriş sepetinizde {itemsCount} üründen {completedItemsCount} tanesini aldınız.</p>}
+    </footer>
   );
 }
 
