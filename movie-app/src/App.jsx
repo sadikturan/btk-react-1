@@ -141,7 +141,7 @@ function ListContainer({ children }) {
     <div className="movie-list">
       <button
         className="btn btn-sm btn-outline-primary mb-2"
-        onClick={() => setIsOpen1((val) => !val)}
+        onClick={() => setIsOpen((val) => !val)}
       >
         {isOpen ? (
           <i className="bi bi-chevron-up"></i>
