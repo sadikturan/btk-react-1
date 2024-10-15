@@ -69,21 +69,32 @@ export default function App() {
 
   return (
     <>
-      <Nav movies={movies} />
-      <Main movies={movies} />
+      <Nav>
+        <Logo />
+        <Search />
+        <NavSearchResults movies={movies} />
+      </Nav>
+      <Main>
+        <div className="row mt-2">
+          <div className="col-md-9">
+            <MovieListContainer>
+              <MovieList movies={movies} />
+            </MovieListContainer>
+          </div>
+          <div className="col-md-3">
+            <MyMovieListContainer />
+          </div>
+        </div>
+      </Main>
     </>
   );
 }
 
-function Nav({ movies }) {
+function Nav({ children }) {
   return (
     <nav className="bg-primary text-white p-2">
       <div className="container">
-        <div className="row align-items-center">
-          <Logo />
-          <Search />
-          <NavSearchResults movies={movies} />
-        </div>
+        <div className="row align-items-center">{children}</div>
       </div>
     </nav>
   );
@@ -114,22 +125,11 @@ function NavSearchResults({ movies }) {
   );
 }
 
-function Main({ movies }) {
-  return (
-    <main className="container">
-      <div className="row mt-2">
-        <div className="col-md-9">
-          <MovieListContainer movies={movies} />
-        </div>
-        <div className="col-md-3">
-          <MyMovieListContainer />
-        </div>
-      </div>
-    </main>
-  );
+function Main({ children }) {
+  return <main className="container">{children}</main>;
 }
 
-function MovieListContainer({ movies }) {
+function MovieListContainer({ children }) {
   const [isOpen1, setIsOpen1] = useState(true);
   return (
     <div className="movie-list">
@@ -143,7 +143,7 @@ function MovieListContainer({ movies }) {
           <i className="bi bi-chevron-down"></i>
         )}
       </button>
-      {isOpen1 && <MovieList movies={movies} />}
+      {isOpen1 && children}
     </div>
   );
 }
