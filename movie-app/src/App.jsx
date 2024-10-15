@@ -66,6 +66,7 @@ const getAverage = (array) =>
 
 export default function App() {
   const [movies, setMovies] = useState(movie_list);
+  const [selectedMovies, setSelectedMovies] = useState(selected_movie_list);
 
   return (
     <>
@@ -77,12 +78,17 @@ export default function App() {
       <Main>
         <div className="row mt-2">
           <div className="col-md-9">
-            <MovieListContainer>
+            <ListContainer>
               <MovieList movies={movies} />
-            </MovieListContainer>
+            </ListContainer>
           </div>
           <div className="col-md-3">
-            <MyMovieListContainer />
+            <ListContainer>
+              <>
+                <MyListSummary selectedMovies={selectedMovies} />
+                <MyMovieList selectedMovies={selectedMovies} />
+              </>
+            </ListContainer>
           </div>
         </div>
       </Main>
@@ -129,21 +135,21 @@ function Main({ children }) {
   return <main className="container">{children}</main>;
 }
 
-function MovieListContainer({ children }) {
-  const [isOpen1, setIsOpen1] = useState(true);
+function ListContainer({ children }) {
+  const [isOpen, setIsOpen] = useState(true);
   return (
     <div className="movie-list">
       <button
         className="btn btn-sm btn-outline-primary mb-2"
         onClick={() => setIsOpen1((val) => !val)}
       >
-        {isOpen1 ? (
+        {isOpen ? (
           <i className="bi bi-chevron-up"></i>
         ) : (
           <i className="bi bi-chevron-down"></i>
         )}
       </button>
-      {isOpen1 && children}
+      {isOpen && children}
     </div>
   );
 }
@@ -171,33 +177,6 @@ function Movie({ movie }) {
           </div>
         </div>
       </div>
-    </div>
-  );
-}
-
-function MyMovieListContainer() {
-  const [selectedMovies, setSelectedMovies] = useState(selected_movie_list);
-  const [isOpen2, setIsOpen2] = useState(true);
-
-  return (
-    <div className="movie-list">
-      <button
-        className="btn btn-sm btn-outline-primary mb-2"
-        onClick={() => setIsOpen2((val) => !val)}
-      >
-        {isOpen2 ? (
-          <i className="bi bi-chevron-up"></i>
-        ) : (
-          <i className="bi bi-chevron-down"></i>
-        )}
-      </button>
-
-      {isOpen2 && (
-        <>
-          <MyListSummary selectedMovies={selectedMovies} />
-          <MyMovieList selectedMovies={selectedMovies} />
-        </>
-      )}
     </div>
   );
 }
