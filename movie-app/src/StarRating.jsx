@@ -20,27 +20,34 @@ export default function StarRating({
   size = 48,
 }) {
   const [rating, setRating] = useState(0);
+  const [hoverRating, setHoverRating] = useState(0);
 
   return (
     <div style={containerStyle}>
       <div style={itemContainerStyle}>
         {Array.from({ length: maxRating }, (val, i) => (
           <Star
-            fill={rating >= i + 1}
-            onRating={() => setRating(i + 1)}
+            fill={hoverRating ? hoverRating >= i + 1 : rating >= i + 1}
             color={color}
             size={size}
+            onRating={() => setRating(i + 1)}
+            onHoverEnter={() => setHoverRating(i + 1)}
+            onHoverLeave={() => setHoverRating(0)}
           />
         ))}
       </div>
-      <p style={textStyle}>{rating || ""}</p>
+      <p style={textStyle}>{hoverRating || rating || ""}</p>
     </div>
   );
 }
 
-function Star({ onRating, fill, color, size }) {
+function Star({ fill, color, size, onRating, onHoverEnter, onHoverLeave }) {
   return (
-    <span onClick={onRating}>
+    <span
+      onClick={onRating}
+      onMouseEnter={onHoverEnter}
+      onMouseLeave={onHoverLeave}
+    >
       {fill ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
