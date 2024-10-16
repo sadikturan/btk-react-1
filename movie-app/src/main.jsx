@@ -7,9 +7,9 @@ import StarRating from "./StarRating.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    {/* <App /> */}
-    <StarRating maxRating={5} color="red" />
+    <App />
+    {/* <StarRating maxRating={5} color="red" />
     <StarRating maxRating={10} />
-    <StarRating size={80} />
+    <StarRating maxRating={5} size={80} /> */}
   </StrictMode>
 );

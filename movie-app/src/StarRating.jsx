@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 const containerStyle = {
   display: "flex",
@@ -14,6 +15,12 @@ const textStyle = {
   fontSize: "1.5rem",
 };
 
+StarRating.propTypes = {
+  maxRating: PropTypes.number,
+  color: PropTypes.string,
+  size: PropTypes.number,
+};
+
 export default function StarRating({
   maxRating = 5,
   color = "#fcc419",
@@ -27,6 +34,7 @@ export default function StarRating({
       <div style={itemContainerStyle}>
         {Array.from({ length: maxRating }, (val, i) => (
           <Star
+            key={i}
             fill={hoverRating ? hoverRating >= i + 1 : rating >= i + 1}
             color={color}
             size={size}
