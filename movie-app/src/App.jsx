@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const movie_list = [
   {
@@ -64,18 +64,21 @@ const selected_movie_list = [
 const getAverage = (array) =>
   array.reduce((sum, value) => sum + value, 2) / array.length;
 
-const api_key = "e8a9d5f82d78ca210c8076d648685c12";
+const api_key = "<api_key>";
 const query = "fight";
 
 export default function App() {
   const [movies, setMovies] = useState([]);
   const [selectedMovies, setSelectedMovies] = useState([]);
 
-  fetch(
-    `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${query}`
-  )
-    .then((res) => res.json())
-    .then((data) => setMovies(data.results));
+  useEffect(function () {
+    // First Render (Mount)
+    fetch(
+      `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${query}`
+    )
+      .then((res) => res.json())
+      .then((data) => setMovies(data.results));
+  }, []);
 
   return (
     <>
