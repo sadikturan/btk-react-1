@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 const getAverage = (array) =>
   array.reduce((sum, value) => sum + value, 2) / array.length;
 
-const api_key = "e8a9d5f82d78ca210c8076d648685c12";
+const api_key = "<api_key>";
 const query = "father";
 
 export default function App() {
