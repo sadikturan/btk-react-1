@@ -9,16 +9,18 @@ const query = "father";
 export default function App() {
   const [movies, setMovies] = useState([]);
   const [selectedMovies, setSelectedMovies] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(function () {
     async function getMovies() {
+      setLoading(true);
       const res = await fetch(
         `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${query}`
       );
       const data = await res.json();
       setMovies(data.results);
+      setLoading(false);
     }
-    console.log(movies);
     getMovies();
   }, []);
 
@@ -33,7 +35,7 @@ export default function App() {
         <div className="row mt-2">
           <div className="col-md-9">
             <ListContainer>
-              <MovieList movies={movies} />
+              {loading ? <Loading /> : <MovieList movies={movies} />}
             </ListContainer>
           </div>
           <div className="col-md-3">
@@ -47,6 +49,14 @@ export default function App() {
         </div>
       </Main>
     </>
+  );
+}
+
+function Loading() {
+  return (
+    <div className="spinner-border text-primary" role="status">
+      <span className="visually-hidden">Loading...</span>
+    </div>
   );
 }
 
