@@ -11,11 +11,18 @@ export default function App() {
   const [selectedMovies, setSelectedMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [selectedMovie, setSelectedMovie] = useState(null);
+
+  function handleSelectedMovie(id) {
+    setSelectedMovie((selectedMovie) => (id === selectedMovie ? null : id));
+  }
+
+  function handleUnselectMovie() {
+    setSelectedMovie(null);
+  }
 
   useEffect(
     function () {
-      console.log(query);
-
       async function getMovies() {
         try {
           setLoading(true);
@@ -63,16 +70,27 @@ export default function App() {
           <div className="col-md-9">
             <ListContainer>
               {loading && <Loading />}
-              {!loading && !error && <MovieList movies={movies} />}
+              {!loading && !error && (
+                <MovieList
+                  movies={movies}
+                  onSelectMovie={handleSelectedMovie}
+                  selectedMovie={selectedMovie}
+                />
+              )}
               {error && <ErrorMessage message={error} />}
             </ListContainer>
           </div>
           <div className="col-md-3">
             <ListContainer>
-              <>
-                <MyListSummary selectedMovies={selectedMovies} />
-                <MyMovieList selectedMovies={selectedMovies} />
-              </>
+              <MyListSummary selectedMovies={selectedMovies} />
+              <MyMovieList selectedMovies={selectedMovies} />
+
+              {selectedMovie && (
+                <MovieDetails
+                  selectedMovie={selectedMovie}
+                  onUnSelectMovie={handleUnselectMovie}
+                />
+              )}
             </ListContainer>
           </div>
         </div>
@@ -157,20 +175,41 @@ function ListContainer({ children }) {
   );
 }
 
-function MovieList({ movies }) {
+function MovieList({ movies, onSelectMovie, selectedMovie }) {
   return (
     <div className="row row-cols-1 row-cols-md-3 row-cols-xl-4 g-4">
       {movies.map((movie) => (
-        <Movie movie={movie} key={movie.id} />
+        <Movie
+          movie={movie}
+          key={movie.id}
+          onSelectMovie={onSelectMovie}
+          selectedMovie={selectedMovie}
+        />
       ))}
     </div>
   );
 }
 
-function Movie({ movie }) {
+function MovieDetails({ selectedMovie, onUnSelectMovie }) {
+  return (
+    <div>
+      <p className="alert alert-primary">{selectedMovie}</p>
+      <button className="btn btn-danger" onClick={onUnSelectMovie}>
+        Kapat
+      </button>
+    </div>
+  );
+}
+
+function Movie({ movie, onSelectMovie, selectedMovie }) {
   return (
     <div className="col mb-2">
-      <div className="card">
+      <div
+        className={`card movie ${
+          selectedMovie === movie.id ? "selected-movie" : ""
+        }`}
+        onClick={() => onSelectMovie(movie.id)}
+      >
         <img
           src={
             movie.poster_path
