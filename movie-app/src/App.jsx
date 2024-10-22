@@ -4,46 +4,58 @@ const getAverage = (array) =>
   array.reduce((sum, value) => sum + value / array.length, 0);
 
 const api_key = "<api_key>";
-const query = "father";
 
 export default function App() {
+  const [query, setQuery] = useState("father");
   const [movies, setMovies] = useState([]);
   const [selectedMovies, setSelectedMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  useEffect(function () {
-    async function getMovies() {
-      try {
-        setLoading(true);
-        setError("");
-        const res = await fetch(
-          `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${query}`
-        );
+  useEffect(
+    function () {
+      console.log(query);
 
-        if (!res.ok) {
-          throw new Error("Bilinmeyen hata oluştu.");
+      async function getMovies() {
+        try {
+          setLoading(true);
+          setError("");
+          const res = await fetch(
+            `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${query}`
+          );
+
+          if (!res.ok) {
+            throw new Error("Bilinmeyen hata oluştu.");
+          }
+
+          const data = await res.json();
+          if (data.total_results === 0) {
+            throw new Error("Film bulunamadı.");
+          }
+
+          setMovies(data.results);
+        } catch (err) {
+          setError(err.message);
         }
-
-        const data = await res.json();
-        if (data.total_results === 0) {
-          throw new Error("Film bulunamadı.");
-        }
-
-        setMovies(data.results);
-      } catch (err) {
-        setError(err.message);
+        setLoading(false);
       }
-      setLoading(false);
-    }
-    getMovies();
-  }, []);
+
+      if (query.length < 4) {
+        setMovies([]);
+        setError("");
+        return;
+      }
+
+      getMovies();
+    },
+    [query]
+  );
 
   return (
     <>
       <Nav>
         <Logo />
-        <Search />
+        <Search query={query} setQuery={setQuery} />
         <NavSearchResults movies={movies} />
       </Nav>
       <Main>
@@ -100,10 +112,16 @@ function Logo() {
   );
 }
 
-function Search() {
+function Search({ query, setQuery }) {
   return (
     <div className="col-4">
-      <input type="text" className="form-control" placeholder="Film ara..." />
+      <input
+        type="text"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        className="form-control"
+        placeholder="Film ara..."
+      />
     </div>
   );
 }
