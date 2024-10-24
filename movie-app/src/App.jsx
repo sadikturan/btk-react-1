@@ -25,6 +25,12 @@ export default function App() {
     handleUnselectMovie();
   }
 
+  function handleDeleteFromList(id) {
+    setSelectedMovies((selectedMovies) =>
+      selectedMovies.filter((m) => m.id !== id)
+    );
+  }
+
   useEffect(
     function () {
       async function getMovies() {
@@ -91,11 +97,15 @@ export default function App() {
                   selectedMovie={selectedMovie}
                   onUnSelectMovie={handleUnselectMovie}
                   onAddToList={handleAddToList}
+                  selectedMovies={selectedMovies}
                 />
               ) : (
                 <>
                   <MyListSummary selectedMovies={selectedMovies} />
-                  <MyMovieList selectedMovies={selectedMovies} />
+                  <MyMovieList
+                    selectedMovies={selectedMovies}
+                    onDeleteFromList={handleDeleteFromList}
+                  />
                 </>
               )}
             </ListContainer>
@@ -197,9 +207,17 @@ function MovieList({ movies, onSelectMovie, selectedMovie }) {
   );
 }
 
-function MovieDetails({ selectedMovie, onUnSelectMovie, onAddToList }) {
+function MovieDetails({
+  selectedMovie,
+  onUnSelectMovie,
+  onAddToList,
+  selectedMovies,
+}) {
   const [movie, setMovie] = useState({});
   const [loading, setLoading] = useState(false);
+
+  const isAddedToList = selectedMovies.map((m) => m.id).includes(selectedMovie);
+
   useEffect(
     function () {
       async function getMovieDetails() {
@@ -256,12 +274,18 @@ function MovieDetails({ selectedMovie, onUnSelectMovie, onAddToList }) {
                   </span>
                 ))}
               </p>
-              <button
-                className="btn btn-primary me-1"
-                onClick={() => onAddToList(movie)}
-              >
-                Listeye Ekle
-              </button>
+
+              {!isAddedToList ? (
+                <button
+                  className="btn btn-primary me-1"
+                  onClick={() => onAddToList(movie)}
+                >
+                  Listeye Ekle
+                </button>
+              ) : (
+                <p>Film listenizde.</p>
+              )}
+
               <button className="btn btn-danger" onClick={onUnSelectMovie}>
                 Kapat
               </button>
@@ -326,13 +350,17 @@ function MyListSummary({ selectedMovies }) {
   );
 }
 
-function MyMovieList({ selectedMovies }) {
+function MyMovieList({ selectedMovies, onDeleteFromList }) {
   return selectedMovies.map((movie) => (
-    <MyListMovie movie={movie} key={movie.Id} />
+    <MyListMovie
+      movie={movie}
+      key={movie.id}
+      onDeleteFromList={onDeleteFromList}
+    />
   ));
 }
 
-function MyListMovie({ movie }) {
+function MyListMovie({ movie, onDeleteFromList }) {
   return (
     <div className="card mb-2">
       <div className="row">
@@ -361,6 +389,12 @@ function MyListMovie({ movie }) {
                 <span>{movie.runtime} dk</span>
               </p>
             </div>
+            <button
+              className="btn btn-danger"
+              onClick={() => onDeleteFromList(movie.id)}
+            >
+              Sil
+            </button>
           </div>
         </div>
       </div>
