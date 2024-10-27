@@ -1,3 +1,4 @@
+import useLocalStorage from "./hooks/useLocalStorage";
 import useMovieDetails from "./hooks/useMovieDetails";
 import useMovies from "./hooks/useMovies";
 import StarRating from "./StarRating";
@@ -9,7 +10,10 @@ const getAverage = (array) =>
 
 export default function App() {
   const [query, setQuery] = useState("father");
-  const [selectedMovies, setSelectedMovies] = useState([]);
+  const [selectedMovies, setSelectedMovies] = useLocalStorage(
+    [],
+    "selectedMovies"
+  );
   const [selectedMovie, setSelectedMovie] = useState(null);
 
   const {
