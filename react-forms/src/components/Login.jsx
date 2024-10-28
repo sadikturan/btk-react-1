@@ -1,22 +1,34 @@
 export default function Login() {
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log("form submitted");
+  }
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div className="header">
         <h1>Login</h1>
         <p>Please enter your login and password!</p>
       </div>
+
       <div className="mb-3">
-        <label for="email" className="form-label">
+        <label htmlFor="email" className="form-label">
           Email
         </label>
-        <input type="email" className="form-control" id="email" />
+        <input type="email" className="form-control" id="email" name="email" />
       </div>
+
       <div className="mb-4">
         <label htmlFor="password" className="form-label">
           Password
         </label>
-        <input type="password" className="form-control" id="password" />
+        <input
+          type="password"
+          className="form-control"
+          id="password"
+          name="password"
+        />
       </div>
+
       <div className="mb-3">
         <button className="btn btn-outline-warning me-2">Submit</button>
         <button className="btn btn-outline-light">Reset</button>
