@@ -1,8 +1,27 @@
+import { useState } from "react";
+
 export default function Login() {
+  // const [newEmail, setEmail] = useState("");
+  // const [newPassword, setPassword] = useState("");
+
+  const initialValues = { email: "", password: "" };
+
+  const [values, setValues] = useState(initialValues);
+
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("form submitted");
+    console.log(values);
   }
+  function handleInputChange(e) {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setValues({
+      ...values, // email: "11", passwod: "233", email: 123
+      [name]: value,
+    });
+  }
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="header">
@@ -14,7 +33,14 @@ export default function Login() {
         <label htmlFor="email" className="form-label">
           Email
         </label>
-        <input type="email" className="form-control" id="email" name="email" />
+        <input
+          type="email"
+          className="form-control"
+          id="email"
+          name="email"
+          value={values.email}
+          onChange={handleInputChange}
+        />
       </div>
 
       <div className="mb-4">
@@ -26,6 +52,8 @@ export default function Login() {
           className="form-control"
           id="password"
           name="password"
+          value={values.password}
+          onChange={handleInputChange}
         />
       </div>
 
