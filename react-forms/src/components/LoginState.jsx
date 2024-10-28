@@ -1,17 +1,25 @@
-import { useRef } from "react";
+import { useState } from "react";
 
 export default function Login() {
-  const email = useRef();
-  const password = useRef();
+  // const [newEmail, setEmail] = useState("");
+  // const [newPassword, setPassword] = useState("");
+
+  const initialValues = { email: "", password: "" };
+
+  const [values, setValues] = useState(initialValues);
 
   function handleSubmit(e) {
     e.preventDefault();
+    console.log(values);
+  }
+  function handleInputChange(e) {
+    const name = e.target.name;
+    const value = e.target.value;
 
-    console.log(email.current.value);
-    console.log(password.current.value);
-
-    email.current.value = "";
-    password.current.value = "";
+    setValues({
+      ...values, // email: "11", passwod: "233", email: 123
+      [name]: value,
+    });
   }
 
   return (
@@ -30,7 +38,8 @@ export default function Login() {
           className="form-control"
           id="email"
           name="email"
-          ref={email}
+          value={values.email}
+          onChange={handleInputChange}
         />
       </div>
 
@@ -43,7 +52,8 @@ export default function Login() {
           className="form-control"
           id="password"
           name="password"
-          ref={password}
+          value={values.password}
+          onChange={handleInputChange}
         />
       </div>
 
