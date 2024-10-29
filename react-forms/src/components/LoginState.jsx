@@ -11,6 +11,7 @@ export default function Login() {
   function handleSubmit(e) {
     e.preventDefault();
     console.log(values);
+    setValues(initialValues);
   }
   function handleInputChange(e) {
     const name = e.target.name;

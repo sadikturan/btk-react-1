@@ -15,6 +15,8 @@ export default function Register() {
     data.hobbies = hobbies;
 
     console.log(data);
+
+    e.target.reset();
   }
 
   return (
@@ -114,7 +116,9 @@ export default function Register() {
 
       <div className="mb-3">
         <button className="btn btn-outline-warning me-2">Submit</button>
-        <button className="btn btn-outline-light">Reset</button>
+        <button type="reset" className="btn btn-outline-light">
+          Reset
+        </button>
       </div>
     </form>
   );
