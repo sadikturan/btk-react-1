@@ -1,12 +1,13 @@
 import { useState } from "react";
 
 export default function Login() {
-  // const [newEmail, setEmail] = useState("");
-  // const [newPassword, setPassword] = useState("");
-
   const initialValues = { email: "", password: "" };
 
   const [values, setValues] = useState(initialValues);
+
+  const emailIsInValid = values.email !== "" && !values.email.includes("@");
+  const passwordIsInvalid =
+    values.password !== "" && values.password.length <= 5;
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -42,6 +43,9 @@ export default function Login() {
           value={values.email}
           onChange={handleInputChange}
         />
+        {emailIsInValid && (
+          <div className="invalid-feedback d-block">Enter valid email.</div>
+        )}
       </div>
 
       <div className="mb-4">
@@ -56,6 +60,11 @@ export default function Login() {
           value={values.password}
           onChange={handleInputChange}
         />
+        {passwordIsInvalid && (
+          <div className="invalid-feedback d-block">
+            Parola min. 5 karakter olmalıdır.
+          </div>
+        )}
       </div>
 
       <div className="mb-3">
