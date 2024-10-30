@@ -1,4 +1,8 @@
+import { useState } from "react";
+
 export default function Register() {
+  const [passwordNotEqual, setPasswordNotEqual] = useState(false);
+
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -14,7 +18,13 @@ export default function Register() {
     const data = Object.fromEntries(formData.entries());
     data.hobbies = hobbies;
 
+    if (data.password !== data.repassword) {
+      setPasswordNotEqual(true);
+      return;
+    }
+
     console.log(data);
+    setPasswordNotEqual(false);
 
     e.target.reset();
   }
@@ -35,6 +45,7 @@ export default function Register() {
           className="form-control"
           id="fullname"
           name="fullname"
+          required
         />
       </div>
 
@@ -42,7 +53,13 @@ export default function Register() {
         <label htmlFor="email" className="form-label">
           Email
         </label>
-        <input type="email" className="form-control" id="email" name="email" />
+        <input
+          type="email"
+          className="form-control"
+          id="email"
+          name="email"
+          required
+        />
       </div>
 
       <div className="row mb-3">
@@ -55,6 +72,9 @@ export default function Register() {
             className="form-control"
             id="password"
             name="password"
+            required
+            minLength={5}
+            maxLength={10}
           />
         </div>
         <div className="col-6">
@@ -66,7 +86,11 @@ export default function Register() {
             className="form-control"
             id="repassword"
             name="repassword"
+            required
           />
+          {passwordNotEqual && (
+            <div className="invalid-feedback d-block">Parola eşleşmiyor.</div>
+          )}
         </div>
       </div>
 
