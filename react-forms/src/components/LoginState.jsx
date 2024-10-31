@@ -1,29 +1,26 @@
-import { useState } from "react";
 import Input from "./Input";
 import useInput from "../hooks/useInput";
+import { isEmail, hasMinLength, isNotEmpty } from "../utils/validations";
 
 export default function Login() {
   const {
     value: emailValue,
     handleInputChange: handleEmailChange,
     handleInputBlur: handleEmailBlur,
-    isEdited: isEmailEdited,
-  } = useInput("");
+    hasError: emailHasError,
+  } = useInput("", (value) => isEmail(value) && isNotEmpty(value));
 
   const {
     value: passwordValue,
     handleInputChange: handlePasswordChange,
     handleInputBlur: handlePasswordBlur,
-    isEdited: isPasswordEdited,
-  } = useInput("");
-
-  const emailIsInValid = isEmailEdited && !emailValue.includes("@");
-  const passwordIsInvalid = isPasswordEdited && passwordValue.length <= 5;
+    hasError: passwordHasError,
+  } = useInput("", (value) => hasMinLength(value, 5));
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (emailIsInValid || passwordIsInvalid) {
+    if (emailHasError || passwordHasError) {
       return;
     }
 
@@ -42,7 +39,7 @@ export default function Login() {
         name="email"
         id="email"
         labelText="Email"
-        error={emailIsInValid && "Enter valid email"}
+        error={emailHasError && "Enter valid email"}
         value={emailValue}
         onBlur={handleEmailBlur}
         onChange={handleEmailChange}
@@ -53,7 +50,7 @@ export default function Login() {
         name="password"
         id="password"
         labelText="Password"
-        error={passwordIsInvalid && "Parola min. 5 karakter olmalıdır."}
+        error={passwordHasError && "Parola min. 5 karakter olmalıdır."}
         value={passwordValue}
         onBlur={handlePasswordBlur}
         onChange={handlePasswordChange}
