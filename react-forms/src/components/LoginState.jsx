@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Input from "./Input";
 
 export default function Login() {
   const initialValues = { email: "", password: "" };
@@ -46,43 +47,27 @@ export default function Login() {
         <p>Please enter your login and password!</p>
       </div>
 
-      <div className="mb-3">
-        <label htmlFor="email" className="form-label">
-          Email
-        </label>
-        <input
-          type="email"
-          className="form-control"
-          id="email"
-          name="email"
-          value={values.email}
-          onBlur={handleInputBlur}
-          onChange={handleInputChange}
-        />
-        {emailIsInValid && (
-          <div className="invalid-feedback d-block">Enter valid email.</div>
-        )}
-      </div>
+      <Input
+        type="email"
+        name="email"
+        id="email"
+        labelText="Email"
+        error={emailIsInValid && "Enter valid email"}
+        value={values.email}
+        onBlur={handleInputBlur}
+        onChange={handleInputChange}
+      />
 
-      <div className="mb-4">
-        <label htmlFor="password" className="form-label">
-          Password
-        </label>
-        <input
-          type="password"
-          className="form-control"
-          id="password"
-          name="password"
-          value={values.password}
-          onBlur={handleInputBlur}
-          onChange={handleInputChange}
-        />
-        {passwordIsInvalid && (
-          <div className="invalid-feedback d-block">
-            Parola min. 5 karakter olmalıdır.
-          </div>
-        )}
-      </div>
+      <Input
+        type="password"
+        name="password"
+        id="password"
+        labelText="Password"
+        error={passwordIsInvalid && "Parola min. 5 karakter olmalıdır."}
+        value={values.password}
+        onBlur={handleInputBlur}
+        onChange={handleInputChange}
+      />
 
       <div className="mb-3">
         <button className="btn btn-outline-warning me-2">Submit</button>
