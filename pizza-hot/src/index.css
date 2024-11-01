@@ -1,0 +1,14 @@
+.item {
+    transition: all .15s ease;
+}
+
+.item:hover {
+    box-shadow: 0 0 30px rgba(0, 0, 0, .16);
+    -webkit-transform: translateY(-10px);
+    transform: translateY(-10px);
+}
+.item-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
