@@ -5,7 +5,7 @@ import "./ThemeSelector.css";
 import { ThemeContext } from "../contexts/ThemeContext";
 
 export default function ThemeSelector() {
-  const { setColor } = useContext(ThemeContext);
+  const { changeColor } = useContext(ThemeContext);
 
   return (
     <div className="container theme-selector">
@@ -14,7 +14,7 @@ export default function ThemeSelector() {
           <span
             key={color}
             className={`bg-${color}`}
-            onClick={() => setColor(color)}
+            onClick={() => changeColor(color)}
           ></span>
         ))}
       </div>
