@@ -1,8 +1,10 @@
 import { useContext } from "react";
 import { ThemeContext } from "../contexts/ThemeContext";
+import { CartContext } from "../contexts/CartContext";
 
 export default function Header() {
   const { color } = useContext(ThemeContext);
+  const { items } = useContext(CartContext);
   return (
     <header>
       <nav
@@ -15,7 +17,7 @@ export default function Header() {
           </a>
           <button className="btn btn-dark">
             <i className="bi bi-cart3"></i>
-            <span className="ms-2">(0)</span>
+            <span className="ms-2">({items.length})</span>
           </button>
         </div>
       </nav>
