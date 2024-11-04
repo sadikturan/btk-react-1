@@ -7,7 +7,7 @@ export const ThemeContext = createContext();
 export function ThemeProvider({ children }) {
   const [state, dispatch] = useReducer(themeReducer, {
     color: "primary",
-    mode: "light",
+    mode: "dark",
   });
 
   function changeColor(value) {
