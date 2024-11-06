@@ -1,0 +1,31 @@
+[
+  {
+    "items": [
+      {
+        "id": "2",
+        "title": "Sebzesever",
+        "description": "Pizza sosu, mozzarella peyniri, mantar, yeşilbiber, soğan, domates, mısır",
+        "image": "2.jpg",
+        "price": "270",
+        "quantity": 1
+      },
+      {
+        "id": "3",
+        "title": "Sucuk Mısır",
+        "description": "Pizza sosu, mozzarella peyniri, sucuk, mısır",
+        "image": "3.jpg",
+        "price": "285",
+        "quantity": 1
+      }
+    ],
+    "customer": {
+      "name": "Sadık Turan",
+      "email": "info@sadikturan.com",
+      "phone": "1111",
+      "address": "kocaeli",
+      "city": "kocaeli",
+      "district": "izmit"
+    },
+    "id": "1730891377306"
+  }
+]
