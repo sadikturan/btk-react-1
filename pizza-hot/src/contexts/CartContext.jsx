@@ -11,11 +11,10 @@ export function CartContextProvider({ children }) {
     dispatch({ type: "ADD_ITEM", item });
   }
 
-  // update cart items
-  function updateItem() {}
-
   // delete cart item
-  function deleteItem() {}
+  function deleteItem(id) {
+    dispatch({ type: "REMOVE_ITEM", id });
+  }
 
   // clear all items
   function clearAll() {}
@@ -23,6 +22,7 @@ export function CartContextProvider({ children }) {
   const cartContext = {
     items: cart.items,
     addItem,
+    deleteItem,
   };
 
   console.log(cartContext);

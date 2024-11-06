@@ -21,6 +21,21 @@ export default function cartReducer(state, action) {
   }
 
   if (action.type == "REMOVE_ITEM") {
+    const index = state.items.findIndex((item) => item.id === action.id);
+
+    const existingItem = state.items[index];
+    const updatedItems = [...state.items];
+
+    if (existingItem.quantity === 1) {
+      updatedItems.splice(existingItem, 1);
+    } else {
+      const updatedItem = {
+        ...existingItem,
+        quantity: existingItem.quantity - 1,
+      };
+      updatedItems[index] = updatedItem;
+    }
+    return { ...state, items: updatedItems };
   }
 
   return state;

@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import Modal from "./UI/Modal";
 import { CartContext } from "../contexts/CartContext";
-import CartItem from "./UI/CartItem";
+import CartItem from "./CartItem";
 
 export default function Cart() {
-  const { items } = useContext(CartContext);
+  const { items, addItem, deleteItem } = useContext(CartContext);
 
   const cartTotal = items.reduce(
     (total, item) => total + item.price * item.quantity,
@@ -16,7 +16,12 @@ export default function Cart() {
       <h2>Sepetiniz</h2>
       <ul className="cart-items">
         {items.map((item) => (
-          <CartItem key={item.id} item={item} />
+          <CartItem
+            key={item.id}
+            item={item}
+            onIncrease={() => addItem(item)}
+            onDecrease={() => deleteItem(item.id)}
+          />
         ))}
       </ul>
       <div className="cart-summary">
