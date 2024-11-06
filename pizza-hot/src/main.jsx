@@ -5,13 +5,16 @@ import "./index.css";
 import App from "./App";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { CartContextProvider } from "./contexts/CartContext";
+import { UIContextProvider } from "./contexts/UIContext";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <ThemeProvider>
-      <CartContextProvider>
-        <App />
-      </CartContextProvider>
-    </ThemeProvider>
+    <UIContextProvider>
+      <ThemeProvider>
+        <CartContextProvider>
+          <App />
+        </CartContextProvider>
+      </ThemeProvider>
+    </UIContextProvider>
   </StrictMode>
 );
