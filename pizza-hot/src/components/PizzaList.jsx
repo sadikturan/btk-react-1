@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import Pizza from "./Pizza";
 import useFetch from "../hooks/useFetch";
 
@@ -9,7 +8,8 @@ const config = {
 export default function PizzaList() {
   const { data, isLoading, error } = useFetch(
     "http://localhost:3000/pizzas",
-    config
+    config,
+    []
   );
 
   if (isLoading) {

@@ -7,8 +7,6 @@ import { ThemeContext } from "../contexts/ThemeContext";
 export default function ThemeSelector() {
   const { changeColor, mode, changeMode } = useContext(ThemeContext);
 
-  console.log(mode);
-
   function toogleMode() {
     changeMode(mode === "dark" ? "light" : "dark");
   }

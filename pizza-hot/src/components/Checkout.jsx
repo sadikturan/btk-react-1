@@ -2,10 +2,28 @@ import { useContext } from "react";
 import Modal from "./UI/Modal";
 import { UIContext } from "../contexts/UIContext";
 import { CartContext } from "../contexts/CartContext";
+import useFetch from "../hooks/useFetch";
+
+const config = {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+};
 
 export default function Checkout() {
   const { uiProgress, hideCheckout } = useContext(UIContext);
-  const { items } = useContext(CartContext);
+  const { items, clearAll } = useContext(CartContext);
+
+  const { data, isLoading, error, SendRequest } = useFetch(
+    "http://localhost:3000/orders",
+    config
+  );
+
+  function handleClose() {
+    hideCheckout();
+    clearAll();
+  }
 
   const cartTotal = items.reduce(
     (total, item) => total + item.price * item.quantity,
@@ -18,18 +36,28 @@ export default function Checkout() {
     const formData = new FormData(e.target);
     const customerData = Object.fromEntries(formData.entries());
 
-    fetch("http://localhost:3000/orders", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+    SendRequest(
+      JSON.stringify({
         order: {
           items: items,
           customer: customerData,
         },
-      }),
-    });
+      })
+    );
+  }
+
+  if (data && !error) {
+    return (
+      <Modal open={uiProgress === "checkout"}>
+        <h2>Sipariş alındı.</h2>
+        <button
+          onClick={() => handleClose()}
+          className="btn btn-sm btn-outline-danger me-2"
+        >
+          Kapat
+        </button>
+      </Modal>
+    );
   }
 
   return (
@@ -38,6 +66,7 @@ export default function Checkout() {
       <p className="text-danger">Sipariş Toplam: {cartTotal} ₺</p>
 
       <form onSubmit={handleSubmit}>
+        {error && <div className="alert alert-danger">{error}</div>}
         <div className="mb-3">
           <label htmlFor="name" className="form-label">
             Ad Soyad
@@ -113,15 +142,21 @@ export default function Checkout() {
             </div>
           </div>
         </div>
-        <button
-          onClick={() => hideCheckout()}
-          className="btn btn-sm btn-outline-danger me-2"
-        >
-          Kapat
-        </button>
-        <button type="submit" className="btn btn-sm btn-primary me-2">
-          Kaydet
-        </button>
+        {isLoading ? (
+          <div className="alert alert-warning">Yükleniyor...</div>
+        ) : (
+          <>
+            <button
+              onClick={() => hideCheckout()}
+              className="btn btn-sm btn-outline-danger me-2"
+            >
+              Kapat
+            </button>
+            <button type="submit" className="btn btn-sm btn-primary me-2">
+              Kaydet
+            </button>
+          </>
+        )}
       </form>
     </Modal>
   );
