@@ -1,7 +1,9 @@
+import ButtonUsage from "./components/ButtonUsage";
+
 function App() {
   return (
     <>
-      <h1>React Material UI</h1>
+      <ButtonUsage />
     </>
   );
 }
