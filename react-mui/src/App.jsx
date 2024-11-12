@@ -4,8 +4,8 @@ import TypographyUsage from "./components/TypographyUsage";
 function App() {
   return (
     <>
-      {/* <ButtonUsage /> */}
-      <TypographyUsage />
+      <ButtonUsage />
+      {/* <TypographyUsage /> */}
     </>
   );
 }
