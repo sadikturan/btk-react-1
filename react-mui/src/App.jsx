@@ -1,4 +1,5 @@
 import ButtonUsage from "./components/ButtonUsage";
+import SelectUsage from "./components/SelectUsage";
 import TextFieldUsage from "./components/TextFieldUsage";
 import TypographyUsage from "./components/TypographyUsage";
 
@@ -7,7 +8,8 @@ function App() {
     <>
       {/* <ButtonUsage /> */}
       {/* <TypographyUsage /> */}
-      <TextFieldUsage />
+      {/* <TextFieldUsage /> */}
+      <SelectUsage />
     </>
   );
 }
