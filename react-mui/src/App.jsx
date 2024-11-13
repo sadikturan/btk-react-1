@@ -1,4 +1,5 @@
 import ButtonUsage from "./components/ButtonUsage";
+import CheckBoxUsage from "./components/CheckBoxUsage";
 import RadioButtonUsage from "./components/RadioButtonUsage";
 import SelectUsage from "./components/SelectUsage";
 import TextFieldUsage from "./components/TextFieldUsage";
@@ -11,7 +12,8 @@ function App() {
       {/* <TypographyUsage /> */}
       {/* <TextFieldUsage /> */}
       {/* <SelectUsage /> */}
-      <RadioButtonUsage />
+      {/* <RadioButtonUsage /> */}
+      <CheckBoxUsage />
     </>
   );
 }
