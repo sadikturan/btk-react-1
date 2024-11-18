@@ -1,1 +1,1 @@
-# btk-react-1
+# BTK AKADEMİ - React Kursu
