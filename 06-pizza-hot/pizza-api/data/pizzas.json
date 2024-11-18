@@ -1,0 +1,77 @@
+[
+    {
+      "id": "1",
+      "title" : "Çiftlik Evi",
+      "description" : "Pizza sosu, mozzarella peyniri, salam, mantar",
+      "image" :  "1.jpg",
+      "price": "280"
+    },
+    {
+      "id": "2",
+      "title" : "Sebzesever",
+      "description" : "Pizza sosu, mozzarella peyniri, mantar, yeşilbiber, soğan, domates, mısır",
+      "image" :  "2.jpg",
+      "price": "270"
+    },
+    {
+      "id": "3",
+      "title" : "Sucuk Mısır",
+      "description" : "Pizza sosu, mozzarella peyniri, sucuk, mısır",
+      "image" :  "3.jpg",
+      "price": "285"
+    },
+    {
+      "id": "4",
+      "title" : "Margarita",
+      "description" : "Pizza sosu, mozzarella peyniri, yeşilbiber",
+      "image" :  "4.jpg",
+      "price": "320"
+    },
+    {
+      "id": "5",
+      "title" : "Festival",
+      "description" : "Pizza sosu, mozzarella peyniri, domates, yeşilbiber, sosis, kekik",
+      "image" :  "5.jpg",
+      "price": "290"
+    }
+    ,
+    {
+      "id": "6",
+      "title" : "4 Mevsim",
+      "description" : "Pizza sosu, mozzarella peyniri, sucuk, mantar, zeytin",
+      "image" :  "6.jpg",
+      "price": "295"
+    }
+    ,
+    {
+      "id": "7",
+      "title" : "Pepperoni Pizza",
+      "description" : "Pizza sosu, mozzarella peyniri, pepperoni",
+      "image" :  "7.jpg",
+      "price": "350"
+    }
+    ,
+    {
+      "id": "8",
+      "title" : "Akdeniz",
+      "description" : "Pizza sosu, mozzarella peyniri, beyaz peynir, zeytin, domates, kekik",
+      "image" :  "8.jpg",
+      "price": "270"
+    }
+    ,
+    {
+      "id": "9",
+      "title" : "Karışık",
+      "description" : "Pizza sosu, mozzarella peyniri, salam, sucuk, sosis, yeşilbiber, mantar, mısır",
+      "image" :  "9.jpg",
+      "price": "340"
+    }
+    ,
+    {
+      "id": "10",
+      "title" : "Superboll Pizza",
+      "description" : "Pizza sosu, mozzarella peyniri, beyaz peynir, zeytin, domates, kekik",
+      "image" :  "10.jpg",
+      "price": "355"
+    }
+  ]

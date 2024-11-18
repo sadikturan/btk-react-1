@@ -1,0 +1,71 @@
+.item {
+    transition: all .15s ease;
+}
+
+.item:hover {
+    box-shadow: 0 0 30px rgba(0, 0, 0, .16);
+    -webkit-transform: translateY(-10px);
+    transform: translateY(-10px);
+}
+.item-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-box {
+    background-color: #FBFBFB;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 0 30px rgba(0, 0, 0, .16);
+    padding: 1rem;
+    width: 80%;
+    max-width: 45rem;
+}
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, .55);
+}
+
+dialog[open] {
+    animation: fade-slide-up 0.3s ease-out forwards;
+}
+
+@keyframes fade-slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(4rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.actions button {
+    width: 30px;
+}
+
+.cart-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.cart-items {
+    margin: 0;
+    padding: 0;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+}
